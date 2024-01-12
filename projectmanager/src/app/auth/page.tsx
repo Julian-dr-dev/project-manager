@@ -7,7 +7,7 @@ import { BsGithub } from "react-icons/bs";
 const Auth = () => {
     const authHandler = async () => {
         try {
-            await signIn('github', {redirect: false});
+            await signIn('github', { redirect: false });
             
         } catch (error) {
             console.log(error);
