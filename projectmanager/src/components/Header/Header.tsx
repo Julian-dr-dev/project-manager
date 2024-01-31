@@ -9,7 +9,10 @@ import { signOut, useSession } from 'next-auth/react';
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
+
   const { data: session } = useSession();
+
+  console.log(session);
 
   return (
     <nav className='fixed top-0 left-0 z-50 w-full bg-white border-b border-gray-200'>
@@ -44,14 +47,12 @@ const Header = () => {
               {!session ? (
                 <></>
               ) : (
-                showDropdown && (
+              showDropdown && (
                   <div className='z-50 right-0 absolute my-4 text-base bg-white divide-y divide-gray-100 rounded shadow'>
                     <div className='px-4 py-3'>
-                      <p className='text-sm text-gray-900'>
-                        {session.user?.name}
-                      </p>
+                      <p className='text-sm text-gray-900'>{session.user?.name}</p>
                       <p className='text-sm text-gray-900 font-medium truncate'>
-                        {session.user?.email}
+                      {session.user?.name}
                       </p>
                     </div>
                     <button

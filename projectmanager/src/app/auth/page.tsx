@@ -1,10 +1,17 @@
 'use client';
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
 import { BsGithub } from "react-icons/bs";
+import { useRouter } from "next/navigation";
 
 
 const Auth = () => {
+
+const { data: session, status } = useSession();
+const router = useRouter();
+
+console.log(session, status);
     const authHandler = async () => {
         try {
             await signIn('github', { redirect: false });
@@ -13,7 +20,11 @@ const Auth = () => {
             console.log(error);
             
         }
-    }
+    };
+
+    useEffect(() => {
+        if (session) router.push('/'); 
+    }, [router, session]);
     return <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
